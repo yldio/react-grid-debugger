@@ -17,7 +17,9 @@ export default class App extends Component {
         {/* <GridDebugger numCols={12} gutters="40px" /> */}
         {/* <GridDebugger numCols={12} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} /> */}
         {/* <GridDebugger numCols={12} gutters={['2rem', '40px', '50px', '1000px']} /> */}
-        <GridDebugger numCols={[1, 4, 7]} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} />
+        {/* <GridDebugger numCols={[1, 4, 7]} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} /> */}
+        {/* <GridDebugger maxWidth={'400px'} numCols={[1, 4, 12]} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} /> */}
+        <GridDebugger maxWidth={['280px', '600px', '1000px']} numCols={[1, 4, 12]} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} />
       </div>
       </ThemeProvider>
     )

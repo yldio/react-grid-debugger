@@ -20,9 +20,7 @@ const Grid = styled.div`
   opacity: 0.6;
   z-index: 1000;
   pointer-events: none;
-  grid-template-columns: repeat(${props => props.cols.maxCols}, 1fr);
-
-  max-width: calc(100% - 48px);
+  grid-template-columns: repeat(${props => props.cols.singleValue}, 1fr);
 
   /* Gutters */
   ${props =>
@@ -37,11 +35,24 @@ const Grid = styled.div`
     ${applyGutters(props.gutters.map)}
   `};
 
-    /* Columns */
+  /* Columns */
   ${props =>
     props.cols && props.cols.map &&
     `
     ${applyNumCols(props.cols.map)}
+  `};
+
+  /* Max-Width */
+  ${props =>
+    props.maxWidth && props.maxWidth.singleValue &&
+    `
+    max-width: ${props.maxWidth.singleValue};
+  `};
+
+  ${props =>
+    props.maxWidth && props.maxWidth.map &&
+    `
+    ${applyMaxWidth(props.maxWidth.map)}
   `};
 `
 
@@ -63,9 +74,15 @@ const applyGutters = (widthGutterMap) => {
 
 const applyNumCols = (widthNumColsMap) => {
   return Object.keys(widthNumColsMap).map(minWidth => {
-    // const rule = ` div:nth-child(n+${widthNumColsMap[minWidth] + 1}) { display: none }`
     const rule = `grid-template-columns: repeat(${widthNumColsMap[minWidth]}, 1fr);`
-    // const rule = ` background: red`
+
+    return buildMediaQueryWithRule(minWidth, rule)
+  }).join('\n')
+}
+
+const applyMaxWidth = (widthMaxWidthMap) => {
+  return Object.keys(widthMaxWidthMap).map(minWidth => {
+    const rule = `max-width: ${widthMaxWidthMap[minWidth]};`
 
     return buildMediaQueryWithRule(minWidth, rule)
   }).join('\n')
@@ -82,7 +99,7 @@ const Col = styled.div`
 const getBreakPoints = (theme) => theme && theme.breakpoints ? theme.breakpoints : defaultBreakpoints
 
 const getObject = (input, theme, type) => {
-  if (typeof input === 'number') {
+  if (typeof input === 'number' || typeof input === 'string') {
     return {
       singleValue: input
     }
@@ -94,9 +111,10 @@ const getObject = (input, theme, type) => {
 
       return {
         map: input,
-        singleValue: Math.max(...array)
+        singleValue: type === 'cols' ? Math.max(...array) : undefined
       }
     } else {
+      // Is array
       const breakpoints = getBreakPoints(theme)
       const breakpointsWidths = Object.keys(breakpoints).map((bpName) => breakpoints[bpName])
       const map = {}
@@ -110,7 +128,7 @@ const getObject = (input, theme, type) => {
 
       return {
         map,
-        singleValue: Math.max(...input)
+        singleValue: type === 'cols' ? Math.max(...input) : undefined
       }
     }
   }
@@ -140,15 +158,15 @@ export default class GridDebugger extends Component {
     const { gutters: providedGutters, maxWidth, numCols } = this.props
     const gutters = getObject(providedGutters, this.props.theme)
     const cols = getObject(numCols, this.props.theme, 'cols')
+    const maxWidthObj = maxWidth ? getObject(maxWidth, this.props.theme) : { singleValue: 'none' }
 
-    console.log({ cols });
-
-    console.log(gutters, maxWidth, numCols, cols.maxCols)
+    console.log(cols)
 
     return (
       <Grid
         gutters={gutters}
-        cols={cols}>
+        cols={cols}
+        maxWidth={maxWidthObj}>
         { Array.from(new Array(cols.singleValue)).map((el, idx) => (
           <Col key={idx} />
         ))
