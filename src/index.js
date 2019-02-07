@@ -79,55 +79,22 @@ const Col = styled.div`
   border-right: 1px solid #31ffde; 
 `
 
-const getGuttersObject = (gutters, theme) => {
-  if (typeof gutters === 'string') {
-    return {
-      singleValue: gutters
-    }
-  }
-
-  if (typeof gutters === 'object') {
-    if (!Array.isArray(gutters)) {
-      return {
-        map: gutters
-      }
-    } else {
-      const breakpoints = getBreakPoints(theme)
-      const breakpointsWidths = Object.keys(breakpoints).map((bpName) => breakpoints[bpName])
-      const map = {}
-
-      breakpointsWidths.forEach((currWidth, idx) => {
-        const gutter = gutters[idx]
-        if (currWidth != null) {
-          map[currWidth] = gutter
-        }
-      })
-
-      return {
-        map
-      }
-    }
-  }
-
-  return {}
-}
-
 const getBreakPoints = (theme) => theme && theme.breakpoints ? theme.breakpoints : defaultBreakpoints
 
-const getColsObject = (numCols, theme) => {
-  if (typeof numCols === 'number') {
+const getObject = (input, theme, type) => {
+  if (typeof input === 'number') {
     return {
-      maxCols: numCols
+      singleValue: input
     }
   }
 
-  if (typeof numCols === 'object') {
-    if (!Array.isArray(numCols)) {
-      const colsArray = Object.keys(numCols).map(width => numCols[width])
+  if (typeof input === 'object') {
+    if (!Array.isArray(input)) {
+      const array = type === 'cols' ? Object.keys(input).map(width => input[width]) : []
 
       return {
-        map: numCols,
-        maxCols: Math.max(...colsArray)
+        map: input,
+        singleValue: Math.max(...array)
       }
     } else {
       const breakpoints = getBreakPoints(theme)
@@ -135,15 +102,15 @@ const getColsObject = (numCols, theme) => {
       const map = {}
 
       breakpointsWidths.forEach((currWidth, idx) => {
-        const numCol = numCols[idx]
-        if (numCol != null) {
-          map[currWidth] = numCol
+        const currItem = input[idx]
+        if (currItem != null) {
+          map[currWidth] = currItem
         }
       })
 
       return {
-        maxCols: Math.max(...numCols),
-        map
+        map,
+        singleValue: Math.max(...input)
       }
     }
   }
@@ -171,8 +138,8 @@ export default class GridDebugger extends Component {
 
   render() {
     const { gutters: providedGutters, maxWidth, numCols } = this.props
-    const gutters = getGuttersObject(providedGutters, this.props.theme)
-    const cols = getColsObject(numCols)
+    const gutters = getObject(providedGutters, this.props.theme)
+    const cols = getObject(numCols, this.props.theme, 'cols')
 
     console.log({ cols });
 
@@ -182,7 +149,7 @@ export default class GridDebugger extends Component {
       <Grid
         gutters={gutters}
         cols={cols}>
-        { Array.from(new Array(cols.maxCols)).map((el, idx) => (
+        { Array.from(new Array(cols.singleValue)).map((el, idx) => (
           <Col key={idx} />
         ))
         }
