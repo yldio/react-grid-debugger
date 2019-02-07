@@ -16,7 +16,8 @@ export default class App extends Component {
       <div>
         {/* <GridDebugger numCols={12} gutters="40px" /> */}
         {/* <GridDebugger numCols={12} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} /> */}
-        <GridDebugger numCols={12} gutters={['2rem', '40px', '50px', '1000px']} />
+        {/* <GridDebugger numCols={12} gutters={['2rem', '40px', '50px', '1000px']} /> */}
+        <GridDebugger numCols={[1, 4, 7]} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} />
       </div>
       </ThemeProvider>
     )
