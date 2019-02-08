@@ -23,7 +23,7 @@ export default class App extends Component {
         <GridDebugger 
           show
           maxWidth={'1000px'} 
-          sideMargins={['1rem', '40px', '10vh']} 
+          sideMargins={['1rem', '40px', '1vh', '1', '1', 0]} 
           numCols={[1, 4, 12]} 
           gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} 
           />
