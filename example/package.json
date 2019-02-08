@@ -9,8 +9,8 @@
     "emotion-theming": "^10.0.7",
     "grid-debugger": "file:..",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
     "react-scripts": "^1.1.4"
   },
   "scripts": {

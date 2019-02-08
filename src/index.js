@@ -11,6 +11,7 @@ const defaultBreakpoints = {
 
 const Grid = styled.div`
   display: grid;
+  box-sizing: content-box;
   margin: 0 auto;
   position: fixed;
   top: 0;
@@ -22,14 +23,31 @@ const Grid = styled.div`
   pointer-events: none;
   grid-template-columns: repeat(${props => props.cols.singleValue}, 1fr);
 
+  /* Side Margins */
+  ${props =>
+    props.sideMargins &&
+    props.sideMargins.singleValue &&
+    `
+    padding: 0 ${props.sideMargins.singleValue};
+  `};
+
+  ${props =>
+    props.sideMargins &&
+    props.sideMargins.map &&
+    `
+    ${applySideMargins(props.sideMargins.map)}
+  `};
+
   /* Gutters */
   ${props =>
+    props.gutters &&
     props.gutters.singleValue &&
     `
     column-gap: ${props.gutters.singleValue};
   `};
 
   ${props =>
+    props.gutters &&
     props.gutters.map &&
     `
     ${applyGutters(props.gutters.map)}
@@ -37,20 +55,23 @@ const Grid = styled.div`
 
   /* Columns */
   ${props =>
-    props.cols && props.cols.map &&
+    props.cols &&
+    props.cols.map &&
     `
     ${applyNumCols(props.cols.map)}
   `};
 
   /* Max-Width */
   ${props =>
-    props.maxWidth && props.maxWidth.singleValue &&
+    props.maxWidth &&
+    props.maxWidth.singleValue &&
     `
     max-width: ${props.maxWidth.singleValue};
   `};
 
   ${props =>
-    props.maxWidth && props.maxWidth.map &&
+    props.maxWidth &&
+    props.maxWidth.map &&
     `
     ${applyMaxWidth(props.maxWidth.map)}
   `};
@@ -64,28 +85,46 @@ const buildMediaQueryWithRule = (width, rule, mode = 'min') => {
   `
 }
 
-const applyGutters = (widthGutterMap) => {
-  return Object.keys(widthGutterMap).map(minWidth => {
-    const rule = `column-gap: ${widthGutterMap[minWidth]}`
+const applySideMargins = widthMarginMap => {
+  return Object.keys(widthMarginMap)
+    .map(minWidth => {
+      const rule = `padding: 0 ${widthMarginMap[minWidth]};`
 
-    return buildMediaQueryWithRule(minWidth, rule)
-  }).join('\n')
+      return buildMediaQueryWithRule(minWidth, rule)
+    })
+    .join('\n')
 }
 
-const applyNumCols = (widthNumColsMap) => {
-  return Object.keys(widthNumColsMap).map(minWidth => {
-    const rule = `grid-template-columns: repeat(${widthNumColsMap[minWidth]}, 1fr);`
+const applyGutters = widthGutterMap => {
+  return Object.keys(widthGutterMap)
+    .map(minWidth => {
+      const rule = `column-gap: ${widthGutterMap[minWidth]};`
 
-    return buildMediaQueryWithRule(minWidth, rule)
-  }).join('\n')
+      return buildMediaQueryWithRule(minWidth, rule)
+    })
+    .join('\n')
 }
 
-const applyMaxWidth = (widthMaxWidthMap) => {
-  return Object.keys(widthMaxWidthMap).map(minWidth => {
-    const rule = `max-width: ${widthMaxWidthMap[minWidth]};`
+const applyNumCols = widthNumColsMap => {
+  return Object.keys(widthNumColsMap)
+    .map(minWidth => {
+      const rule = `grid-template-columns: repeat(${
+        widthNumColsMap[minWidth]
+      }, 1fr);`
 
-    return buildMediaQueryWithRule(minWidth, rule)
-  }).join('\n')
+      return buildMediaQueryWithRule(minWidth, rule)
+    })
+    .join('\n')
+}
+
+const applyMaxWidth = widthMaxWidthMap => {
+  return Object.keys(widthMaxWidthMap)
+    .map(minWidth => {
+      const rule = `max-width: ${widthMaxWidthMap[minWidth]};`
+
+      return buildMediaQueryWithRule(minWidth, rule)
+    })
+    .join('\n')
 }
 
 const Col = styled.div`
@@ -93,10 +132,11 @@ const Col = styled.div`
   height: 100vh;
   background: #d8fff7;
   border-left: 1px solid #31ffde;
-  border-right: 1px solid #31ffde; 
+  border-right: 1px solid #31ffde;
 `
 
-const getBreakPoints = (theme) => theme && theme.breakpoints ? theme.breakpoints : defaultBreakpoints
+const getBreakPoints = theme =>
+  theme && theme.breakpoints ? theme.breakpoints : defaultBreakpoints
 
 const getObject = (input, theme, type) => {
   if (typeof input === 'number' || typeof input === 'string') {
@@ -107,16 +147,22 @@ const getObject = (input, theme, type) => {
 
   if (typeof input === 'object') {
     if (!Array.isArray(input)) {
-      const array = type === 'cols' ? Object.keys(input).map(width => input[width]) : []
+      // Input is an object.
+      const singleValue =
+        type === 'cols'
+          ? Math.max(...Object.keys(input).map(width => input[width]))
+          : undefined
 
       return {
         map: input,
-        singleValue: type === 'cols' ? Math.max(...array) : undefined
+        singleValue
       }
     } else {
-      // Is array
+      // Input is an array.
       const breakpoints = getBreakPoints(theme)
-      const breakpointsWidths = Object.keys(breakpoints).map((bpName) => breakpoints[bpName])
+      const breakpointsWidths = Object.keys(breakpoints).map(
+        bpName => breakpoints[bpName]
+      )
       const map = {}
 
       breakpointsWidths.forEach((currWidth, idx) => {
@@ -136,6 +182,7 @@ const getObject = (input, theme, type) => {
 
 export default class GridDebugger extends Component {
   static propTypes = {
+    show: PropTypes.bool,
     gutters: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
@@ -146,32 +193,73 @@ export default class GridDebugger extends Component {
       PropTypes.array,
       PropTypes.string
     ]),
+    sideMargins: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array,
+      PropTypes.string
+    ]),
     numCols: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.object,
       PropTypes.array
     ]).isRequired,
     theme: PropTypes.object
-  };
+  }
+
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleKey)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKey)
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      showGrid: !!props.show
+    }
+  }
 
   render() {
-    const { gutters: providedGutters, maxWidth, numCols } = this.props
+    const {
+      theme,
+      gutters: providedGutters,
+      maxWidth,
+      numCols,
+      sideMargins: providedSideMargins
+    } = this.props
     const gutters = getObject(providedGutters, this.props.theme)
-    const cols = getObject(numCols, this.props.theme, 'cols')
-    const maxWidthObj = maxWidth ? getObject(maxWidth, this.props.theme) : { singleValue: 'none' }
+    const cols = getObject(numCols, theme, 'cols')
+    const sideMargins = getObject(
+      providedSideMargins,
+      theme,
+      'sideMargins'
+    )
+    const maxWidthObj = maxWidth
+      ? getObject(maxWidth, theme)
+      : { singleValue: 'none' }
 
-    console.log(cols)
-
-    return (
+    return this.state.showGrid ? (
       <Grid
         gutters={gutters}
         cols={cols}
-        maxWidth={maxWidthObj}>
-        { Array.from(new Array(cols.singleValue)).map((el, idx) => (
+        sideMargins={sideMargins}
+        maxWidth={maxWidthObj}
+      >
+        {Array.from(new Array(cols.singleValue)).map((_, idx) => (
           <Col key={idx} />
-        ))
-        }
+        ))}
       </Grid>
-    )
+    ) : null
+  }
+
+  handleKey = ev => {
+    if (ev.key === 'g' && ev.ctrlKey) {
+      this.setState({
+        showGrid: !this.state.showGrid
+      })
+    }
   }
 }
