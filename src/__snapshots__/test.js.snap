@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`render null if no \`show\` prop is passed 1`] = `null`;
+
 exports[`renders <GridDebugger /> with array props correctly 1`] = `
 <div
   className="css-dcj038"

@@ -3,6 +3,16 @@ import renderer from 'react-test-renderer'
 
 import GridDebugger from '../src/index'
 
+it('render null if no `show` prop is passed', () => {
+  const tree = renderer.create(
+    <GridDebugger 
+      maxWidth={'1000px'}
+      numCols={12}
+      gutter={'4rem'}
+    />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 it('renders <GridDebugger /> with single value props correctly', () => {
   const tree = renderer.create(
     <GridDebugger 
@@ -38,3 +48,4 @@ it('renders <GridDebugger /> with array props correctly', () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
