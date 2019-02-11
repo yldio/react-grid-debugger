@@ -20,32 +20,32 @@ const Grid = styled.div`
 
   /* Side Margins */
   ${props =>
-    props.gutters &&
-    props.gutters.singleValue &&
+    props.gutter &&
+    props.gutter.singleValue &&
     `
-    padding: 0 ${props.gutters.singleValue};
+    padding: 0 ${props.gutter.singleValue};
   `};
 
   ${props =>
-    props.gutters &&
-    props.gutters.map &&
+    props.gutter &&
+    props.gutter.map &&
     `
-    ${applySideMargins(props.gutters.map)}
+    ${applySideMargins(props.gutter.map)}
   `};
 
   /* Gutters */
   ${props =>
-    props.gutters &&
-    props.gutters.singleValue &&
+    props.gutter &&
+    props.gutter.singleValue &&
     `
-    column-gap: ${props.gutters.singleValue};
+    column-gap: ${props.gutter.singleValue};
   `};
 
   ${props =>
-    props.gutters &&
-    props.gutters.map &&
+    props.gutter &&
+    props.gutter.map &&
     `
-    ${applyGutters(props.gutters.map)}
+    ${applyGutters(props.gutter.map)}
   `};
 
   /* Columns */
@@ -86,7 +86,7 @@ const Col = styled.div`
 export default class GridDebugger extends Component {
   static propTypes = {
     show: PropTypes.bool,
-    gutters: PropTypes.oneOfType([
+    gutter: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.array,
       PropTypes.string
@@ -123,11 +123,11 @@ export default class GridDebugger extends Component {
   render() {
     const {
       theme,
-      gutters,
+      gutter,
       maxWidth,
       numCols
     } = this.props
-    const guttersObject = getGridProperty(gutters, this.props.theme)
+    const guttersObject = getGridProperty(gutter, this.props.theme)
     const cols = getGridProperty(numCols, theme, 'cols')
     const maxWidthObj = maxWidth
       ? getGridProperty(maxWidth, theme)
@@ -135,7 +135,7 @@ export default class GridDebugger extends Component {
 
     return this.state.showGrid ? (
       <Grid
-        gutters={guttersObject}
+        gutter={guttersObject}
         cols={cols}
         maxWidth={maxWidthObj}
       >
