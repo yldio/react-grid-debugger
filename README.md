@@ -32,7 +32,9 @@ Please check [Should this be a dependency or a devDependency?](#should-this-be-a
 
 ## Usage
 
-`grid-debugger` is a react component, so you can use it like:
+`grid-debugger` is a react component, so you can use it like you'd use any other component.
+
+It accepts a `theme` prop so if your project uses [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) and you have defined the `breakpoints` for your theme, you can pass it into the debugger.
 
 ```jsx
 import React, { Component } from 'react'
@@ -42,23 +44,24 @@ import GridDebugger from 'grid-debugger'
 export default class App extends Component {
   render () {
     return (
-      <div>
-        <main 
-          <GridDebugger 
-            show
-            maxWidth={'1000px'} 
-            numCols={[1, 4, 12]} 
-            gutter={{ 320: '2rem', 680: '40px', 800: '50px'}} 
-            />
+      <main 
+        <GridDebugger 
+          show
+          maxWidth={'1000px'} 
+          theme={myAppTheme}
+          numCols={[1, 4, 12]} 
+          gutter={{ 320: '2rem', 680: '40px', 800: '50px'}} 
+          />
       </main>
     )
   }
 }
 ```
 
+### Toggling the debugger
 Pressing keys `Ctrl` and `g` simultaneously toggles the debugger visibility.
 
-### More examples:
+### More configuration examples:
 ```js
 <GridDebugger numCols={12} gutters="40px" />
 <GridDebugger numCols={12} gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} />
@@ -78,7 +81,7 @@ Note that most of the props accept:
 | Prop | Type | Required |Description |
 |------|----------|------|-------------|
 | show | `bool` | No | wether the debugger should be initially visible (it can be toggled with `ctrl + g`) |
-| theme |  No | `object` | represents the app theme, normally provided by a `ThemeProvider`, if you styled-components/emotion |
+| theme |  No | `object` | represents the app theme, normally provided by a `ThemeProvider`, if you [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) |
 | maxWidth | `string | array | object` | No  | grid maximum width |
 | numCols | `number | array | object`  | Yes | number of columns |
 | gutter | `string | array | object` | Yes | gutter size |
