@@ -136,7 +136,6 @@ const Col = styled.div`
 
   border-left: 1px solid #31ffde;
   border-right: 1px solid #31ffde;
-  background: #dc4848;
 `
 
 const getBreakPoints = theme =>
