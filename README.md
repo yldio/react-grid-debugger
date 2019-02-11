@@ -2,6 +2,8 @@
 
 > Visual Tool for debugging grid-based layouts
 
+![Grid Debugger Demo](./grid.gif)
+
 [![NPM](https://img.shields.io/npm/v/grid-debugger.svg)](https://www.npmjs.com/package/grid-debugger) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Table of Contents

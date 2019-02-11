@@ -24,7 +24,7 @@ export default class App extends Component {
           show
           maxWidth={'1000px'} 
           numCols={[1, 4, 12]} 
-          gutters={{ 320: '2rem', 680: '40px', 800: '50px'}} 
+          gutter={{ 320: '2rem', 680: '40px', 800: '50px'}} 
           />
       </div>
       </ThemeProvider>
