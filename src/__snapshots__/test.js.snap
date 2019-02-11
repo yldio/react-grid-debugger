@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders <GridDebugger /> with array props correctly 1`] = `
+<div
+  className="css-dcj038"
+  cols={
+    Object {
+      "map": Object {
+        "0": 1,
+        "1025": 12,
+        "737": 4,
+      },
+      "singleValue": 12,
+    }
+  }
+>
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+</div>
+`;
+
+exports[`renders <GridDebugger /> with object props correctly 1`] = `
+<div
+  className="css-16zwufx"
+  cols={
+    Object {
+      "map": Object {
+        "320": 1,
+        "680": 2,
+        "800": 12,
+      },
+      "singleValue": 12,
+    }
+  }
+>
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+</div>
+`;
+
+exports[`renders <GridDebugger /> with single value props correctly 1`] = `
+<div
+  className="css-1cbjbb6"
+  cols={
+    Object {
+      "singleValue": 12,
+    }
+  }
+>
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+  <div
+    className="css-1tjnv1f"
+  />
+</div>
+`;
