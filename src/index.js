@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-
-/* Default Breakpoints taken from https://github.com/jameslnewell/styled-components-breakpoint */
-const defaultBreakpoints = {
-  mobile: 0, // targeting all devices
-  tablet: 737, // targeting devices that are LARGER than the iPhone 6 Plus (which is 736px in landscape mode)
-  desktop: 1025 // targeting devices that are LARGER than the iPad (which is 1024px in landscape mode)
-}
+import { applyGutters, applyMaxWidth, applyNumCols, applySideMargins } from './rules'
+import { getGridProperty } from './utils'
 
 const Grid = styled.div`
   display: grid;
@@ -77,56 +72,6 @@ const Grid = styled.div`
   `};
 `
 
-const buildMediaQueryWithRule = (width, rule, mode = 'min') => {
-  return `
-    @media (${mode}-width: ${width}px) {
-      ${rule}
-    }
-  `
-}
-
-const applySideMargins = widthMarginMap => {
-  return Object.keys(widthMarginMap)
-    .map(minWidth => {
-      const rule = `padding: 0 ${widthMarginMap[minWidth]};`
-
-      return buildMediaQueryWithRule(minWidth, rule)
-    })
-    .join('\n')
-}
-
-const applyGutters = widthGutterMap => {
-  return Object.keys(widthGutterMap)
-    .map(minWidth => {
-      const rule = `column-gap: ${widthGutterMap[minWidth]};`
-
-      return buildMediaQueryWithRule(minWidth, rule)
-    })
-    .join('\n')
-}
-
-const applyNumCols = widthNumColsMap => {
-  return Object.keys(widthNumColsMap)
-    .map(minWidth => {
-      const rule = `grid-template-columns: repeat(${
-        widthNumColsMap[minWidth]
-      }, 1fr);`
-
-      return buildMediaQueryWithRule(minWidth, rule)
-    })
-    .join('\n')
-}
-
-const applyMaxWidth = widthMaxWidthMap => {
-  return Object.keys(widthMaxWidthMap)
-    .map(minWidth => {
-      const rule = `max-width: ${widthMaxWidthMap[minWidth]};`
-
-      return buildMediaQueryWithRule(minWidth, rule)
-    })
-    .join('\n')
-}
-
 const Col = styled.div`
   width: 100%;
   height: 100vh;
@@ -137,51 +82,6 @@ const Col = styled.div`
   border-left: 1px solid #31ffde;
   border-right: 1px solid #31ffde;
 `
-
-const getBreakPoints = theme =>
-  theme && theme.breakpoints ? theme.breakpoints : defaultBreakpoints
-
-const getObject = (input, theme, type) => {
-  if (typeof input === 'number' || typeof input === 'string') {
-    return {
-      singleValue: input
-    }
-  }
-
-  if (typeof input === 'object') {
-    if (!Array.isArray(input)) {
-      // Input is an object.
-      const singleValue =
-        type === 'cols'
-          ? Math.max(...Object.keys(input).map(width => input[width]))
-          : undefined
-
-      return {
-        map: input,
-        singleValue
-      }
-    } else {
-      // Input is an array.
-      const breakpoints = getBreakPoints(theme)
-      const breakpointsWidths = Object.keys(breakpoints).map(
-        bpName => breakpoints[bpName]
-      )
-      const map = {}
-
-      breakpointsWidths.forEach((currWidth, idx) => {
-        const currItem = input[idx]
-        if (currItem != null) {
-          map[currWidth] = currItem
-        }
-      })
-
-      return {
-        map,
-        singleValue: type === 'cols' ? Math.max(...input) : undefined
-      }
-    }
-  }
-}
 
 export default class GridDebugger extends Component {
   static propTypes = {
@@ -227,10 +127,10 @@ export default class GridDebugger extends Component {
       maxWidth,
       numCols
     } = this.props
-    const guttersObject = getObject(gutters, this.props.theme)
-    const cols = getObject(numCols, theme, 'cols')
+    const guttersObject = getGridProperty(gutters, this.props.theme)
+    const cols = getGridProperty(numCols, theme, 'cols')
     const maxWidthObj = maxWidth
-      ? getObject(maxWidth, theme)
+      ? getGridProperty(maxWidth, theme)
       : { singleValue: 'none' }
 
     return this.state.showGrid ? (
