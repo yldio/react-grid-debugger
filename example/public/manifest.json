@@ -1,6 +1,6 @@
 {
-  "short_name": "grid-debugger",
-  "name": "grid-debugger",
+  "short_name": "react-grid-debugger",
+  "name": "react-grid-debugger",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",

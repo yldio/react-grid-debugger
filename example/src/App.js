@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'emotion-theming'
-import GridDebugger from 'grid-debugger'
+import GridDebugger from 'react-grid-debugger'
 
 const theme = {
   colors: {

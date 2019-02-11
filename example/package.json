@@ -1,13 +1,13 @@
 {
-  "name": "grid-debugger-example",
-  "homepage": "https://antoniocapelo.github.io/grid-debugger",
+  "name": "react-grid-debugger-example",
+  "homepage": "https://github.com/yldio/react-grid-debugger",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "emotion": "^10.0.7",
     "emotion-theming": "^10.0.7",
-    "grid-debugger": "file:..",
+    "react-grid-debugger": "file:..",
     "prop-types": "^15.6.2",
     "react": "16.8.0",
     "react-dom": "16.8.0",

@@ -1,10 +1,10 @@
 {
-  "name": "grid-debugger",
+  "name": "react-grid-debugger",
   "version": "1.0.0",
   "description": "Tool for debugging grid-based layouts",
   "author": "antoniocapelo",
-  "license": "MIT",
-  "repository": "antoniocapelo/grid-debugger",
+  "license": "MPL-2.0",
+  "repository": "yldio/react-grid-debugger",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

@@ -1,10 +1,10 @@
-# grid-debugger
+# react-grid-debugger
 
 > Visual Tool for debugging grid-based layouts
 
 ![Grid Debugger Demo](./grid.gif)
 
-[![NPM](https://img.shields.io/npm/v/grid-debugger.svg)](https://www.npmjs.com/package/grid-debugger) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-grid-debugger.svg)](https://www.npmjs.com/package/react-grid-debugger) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ This is a visual tool based on a React component that adds a grid overlay on top
 ## Install
 
 ```bash
-npm install --save grid-debugger
+npm install --save react-grid-debugger
 or
 yarn add grid-debuger
 ```
@@ -34,14 +34,14 @@ Please check [Should this be a dependency or a devDependency?](#should-this-be-a
 
 ## Usage
 
-`grid-debugger` is a react component, so you can use it like you'd use any other component.
+`react-grid-debugger` is a react component, so you can use it like you'd use any other component.
 
 It accepts a `theme` prop so if your project uses [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) and you have defined the `breakpoints` for your theme, you can pass it into the debugger.
 
 ```jsx
 import React, { Component } from 'react'
 
-import GridDebugger from 'grid-debugger'
+import GridDebugger from 'react-grid-debugger'
 
 export default class App extends Component {
   render () {
