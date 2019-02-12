@@ -46,7 +46,7 @@ import GridDebugger from 'react-grid-debugger'
 export default class App extends Component {
   render () {
     return (
-      <main 
+      <main> 
         <GridDebugger 
           show
           maxWidth={'1000px'} 
