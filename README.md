@@ -76,7 +76,7 @@ Pressing keys `Ctrl` and `g` simultaneously toggles the debugger visibility.
 ## Props
 
 Note that most of the props accept:
-- `string | number`: for indicating a single value for that prop.
+- `string` or `number`: for indicating a single value for that prop.
 - `array`: an array (of numbers or strings) that should be used as values, ordered by breakpoints. This means that the first element of the array will be used for the first breakpoint, the second one for the second breakpoint, and so on. If no `theme` is provided to the debugger, the [default breakpoints](./src/defaultBreakpoints.js) are used. If the number of values provided is bigger than the number of breakpoints, the remaining ones are discarded.
 - `object`: an object where each key represents a screen width and its property represents the value that should be used for that breakpoint.
 
