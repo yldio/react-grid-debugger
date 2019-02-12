@@ -1,8 +1,15 @@
 {
   "name": "react-grid-debugger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tool for debugging grid-based layouts",
-  "keywords": ["grid", "layout", "debugger", "react", "row", "column"],
+  "keywords": [
+    "grid",
+    "layout",
+    "debugger",
+    "react",
+    "row",
+    "column"
+  ],
   "license": "MPL-2.0",
   "repository": "yldio/react-grid-debugger",
   "main": "dist/index.js",

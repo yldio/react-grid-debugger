@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/yldio/react-grid-debugger/compare/v1.0.0...v1.0.1) (2019-02-12)
+
+
+### Bug Fixes
+
+* add keywords to package.json ([ea41dbc](https://github.com/yldio/react-grid-debugger/commit/ea41dbc))
+* fix table formatting ([9a21445](https://github.com/yldio/react-grid-debugger/commit/9a21445))
+* fix typo on readme ([c00cc9a](https://github.com/yldio/react-grid-debugger/commit/c00cc9a))
+* improve doc ([1749b94](https://github.com/yldio/react-grid-debugger/commit/1749b94))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2019-02-11)
 
