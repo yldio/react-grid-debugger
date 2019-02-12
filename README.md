@@ -84,9 +84,9 @@ Note that most of the props accept:
 |------|----------|------|-------------|
 | show | `bool` | No | wether the debugger should be initially visible (it can be toggled with `ctrl + g`) |
 | theme |  No | `object` | represents the app theme, normally provided by a `ThemeProvider`, if you [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) |
-| maxWidth | `string | array | object` | No  | grid maximum width |
-| numCols | `number | array | object`  | Yes | number of columns |
-| gutter | `string | array | object` | Yes | gutter size |
+| maxWidth | `string / array / object` | No  | grid maximum width |
+| numCols | `number / array / object`  | Yes | number of columns |
+| gutter | `string / array / object` | Yes | gutter size |
 
 
 ## Should this be a dependency or a devDependency?
