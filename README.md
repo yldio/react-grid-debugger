@@ -12,7 +12,7 @@
 - [Install](#install)
 - [Usage](#usage)
 - [Props](#props)
-- [Should this be a dependency or a devDependency?](#should-this-be-a-dependency-or-a-devdependency?)
+- [Should this be a dependency or a devDependency?](#should-this-be-a-dependency-or-a-devdependency)
 - [License](#license)
 
 
@@ -30,7 +30,7 @@ or
 yarn add grid-debuger
 ```
 
-Please check [Should this be a dependency or a devDependency?](#should-this-be-a-dependency-or-a-devdependency?) to understand if you need it as a dev dependency or not
+Please check [Should this be a dependency or a devDependency?](#should-this-be-a-dependency-or-a-devdependency) to understand if you need it as a dev dependency or not
 
 ## Usage
 
@@ -46,13 +46,13 @@ import GridDebugger from 'react-grid-debugger'
 export default class App extends Component {
   render () {
     return (
-      <main> 
-        <GridDebugger 
+      <main>
+        <GridDebugger
           show
-          maxWidth={'1000px'} 
+          maxWidth={'1000px'}
           theme={myAppTheme}
-          numCols={[1, 4, 12]} 
-          gutter={{ 320: '2rem', 680: '40px', 800: '50px'}} 
+          numCols={[1, 4, 12]}
+          gutter={{ 320: '2rem', 680: '40px', 800: '50px'}}
           />
       </main>
     )
@@ -83,7 +83,7 @@ Note that most of the props accept:
 | Prop | Type | Required |Description |
 |------|----------|------|-------------|
 | show | `bool` | No | wether the debugger should be initially visible (it can be toggled with `ctrl + g`) |
-| theme |  No | `object` | represents the app theme, normally provided by a `ThemeProvider`, if you [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) |
+| theme |  No | `object` | represents the app theme, normally provided by a `ThemeProvider`, if you use [styled-components](https://github.com/styled-components/styled-components)/[emotion](https://github.com/emotion-js/emotion) |
 | maxWidth | `string / array / object` | No  | grid maximum width |
 | numCols | `number / array / object`  | Yes | number of columns |
 | gutter | `string / array / object` | Yes | gutter size |
